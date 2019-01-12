@@ -1,8 +1,5 @@
 use crate::tally::Tally;
-use rand::{
-    distributions::{Distribution, Uniform},
-    Rng,
-};
+use rand::Rng;
 use std::error::Error;
 use std::fmt::{self, Display};
 use std::num::ParseIntError;
@@ -24,7 +21,9 @@ impl Specification {
         Specification { size, count: 1 }
     }
 
-    pub fn sample<'rng>(self, rng: &'rng mut impl Rng) -> Tally {
+    pub fn sample(self, rng: &mut impl Rng) -> Tally {
+        use rand::distributions::{Distribution, Uniform};
+
         Uniform::new(0, u32::from(self.size))
             .sample_iter(rng)
             .take(usize::from(self.count))
