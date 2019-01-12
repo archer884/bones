@@ -1,3 +1,8 @@
+use crate::tally::Tally;
+use rand::{
+    distributions::{Distribution, Uniform},
+    Rng,
+};
 use std::error::Error;
 use std::fmt::{self, Display};
 use std::num::ParseIntError;
@@ -12,17 +17,18 @@ pub struct Specification {
 
 impl Specification {
     fn new(count: u8, size: u8) -> Specification {
-        Specification {
-            size,
-            count,
-        }
+        Specification { size, count }
     }
-    
+
     fn size(size: u8) -> Specification {
-        Specification {
-            size,
-            count: 1,
-        }
+        Specification { size, count: 1 }
+    }
+
+    pub fn sample<'rng>(self, rng: &'rng mut impl Rng) -> Tally {
+        Uniform::new(0, u32::from(self.size))
+            .sample_iter(rng)
+            .take(usize::from(self.count))
+            .collect()
     }
 }
 
@@ -33,7 +39,7 @@ impl FromStr for Specification {
         fn parse_int(s: &str) -> Result<u8, ParseIntError> {
             s.parse()
         }
-        
+
         let mut parts = s.split('d').map(parse_int);
 
         let left = parts.next().ok_or(ParseError::SegmentCount)??;

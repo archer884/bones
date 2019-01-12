@@ -1,7 +1,21 @@
 mod spec;
+mod tally;
 
-fn main() {    
-    use crate::spec::Specification;
+use crate::spec::Specification;
 
-    let _ = dbg!("2d256".parse::<Specification>());
+fn main() {
+    let mut rng = rand::thread_rng();
+    for spec in read_specifications() {
+        println!("{}", spec.sample(&mut rng));
+    }
+}
+
+fn read_specifications() -> impl Iterator<Item = Specification> {
+    use std::env;
+
+    fn parse_specification(s: impl AsRef<str>) -> Option<Specification> {
+        s.as_ref().parse().ok()
+    }
+
+    env::args().skip(1).filter_map(parse_specification)
 }
