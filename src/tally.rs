@@ -46,7 +46,7 @@ impl FromIterator<u32> for Tally {
 
         iter.into_iter().for_each(|n| {
             sum += n;
-            values.push(n + 1);
+            values.push(n);
         });
 
         Tally { sum, values, modifier: None }

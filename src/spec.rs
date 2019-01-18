@@ -26,6 +26,7 @@ impl Specification {
 
         Uniform::new(0, u32::from(self.size))
             .sample_iter(rng)
+            .map(|n| n + 1)
             .take(usize::from(self.count))
             .collect()
     }
