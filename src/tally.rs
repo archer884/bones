@@ -5,20 +5,36 @@ use std::iter::FromIterator;
 pub struct Tally {
     sum: u32,
     values: Vec<u32>,
+    modifier: Option<u32>,
+}
+
+impl Tally {
+    pub fn modify(&mut self, modifier: u32) {
+        self.modifier = Some(modifier);
+    }
+
+    pub fn sum(&self) -> u32 {
+        self.sum
+    }
 }
 
 impl Display for Tally {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self.values.len() {
-            0 => f.write_str("0 []"),
+            0 => return f.write_str("0 []"),
             _ => {
-                write!(f, "{} [", self.sum)?;
+                write!(f, "{} [", self.sum + self.modifier.unwrap_or_default())?;
                 let mut values = self.values.iter();
                 for item in (&mut values).take(self.values.len() - 1) {
                     write!(f, "{}, ", item)?;
                 }
-                write!(f, "{}]", values.next().expect("Impossibru"))
+                write!(f, "{}]", values.next().expect("Impossibru"))?;
             }
+        }
+
+        match self.modifier {
+            Some(modifier) => write!(f, " (+{})", modifier),
+            None => Ok(())
         }
     }
 }
@@ -26,13 +42,13 @@ impl Display for Tally {
 impl FromIterator<u32> for Tally {
     fn from_iter<T: IntoIterator<Item = u32>>(iter: T) -> Tally {
         let mut sum = 0;
-        let mut values = Vec::with_capacity(4);
+        let mut values = Vec::new();
 
         iter.into_iter().for_each(|n| {
             sum += n;
-            values.push(n);
+            values.push(n + 1);
         });
 
-        Tally { sum, values }
+        Tally { sum, values, modifier: None }
     }
 }

@@ -1,19 +1,20 @@
+mod expression;
 mod spec;
 mod tally;
 
-use crate::spec::Specification;
+use crate::expression::Expression;
 
 fn main() {
     let mut rng = rand::thread_rng();
-    for spec in read_specifications() {
+    for spec in read_expressions() {
         println!("{}", spec.sample(&mut rng));
     }
 }
 
-fn read_specifications() -> impl Iterator<Item = Specification> {
+fn read_expressions() -> impl Iterator<Item = Expression> {
     use std::env;
 
-    fn parse_specification(s: impl AsRef<str>) -> Option<Specification> {
+    fn parse_specification(s: impl AsRef<str>) -> Option<Expression> {
         s.as_ref().parse().ok()
     }
 
