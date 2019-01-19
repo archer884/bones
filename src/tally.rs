@@ -44,10 +44,10 @@ impl FromIterator<u32> for Tally {
         let mut sum = 0;
         let mut values = Vec::new();
 
-        iter.into_iter().for_each(|n| {
+        for n in iter {
             sum += n;
             values.push(n);
-        });
+        }
 
         Tally { sum, values, modifier: None }
     }
