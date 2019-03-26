@@ -13,10 +13,5 @@ fn main() {
 
 fn read_expressions() -> impl Iterator<Item = Expression> {
     use std::env;
-
-    fn parse_specification(s: impl AsRef<str>) -> Option<Expression> {
-        s.as_ref().parse().ok()
-    }
-
-    env::args().skip(1).filter_map(parse_specification)
+    env::args().skip(1).filter_map(|s| s.parse().ok())
 }
