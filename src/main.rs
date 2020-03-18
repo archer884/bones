@@ -1,13 +1,9 @@
-mod expression;
-mod spec;
-mod tally;
-
-use crate::expression::Expression;
+use bangdice::Expression;
 
 fn main() {
     let mut rng = rand::thread_rng();
-    for spec in read_expressions() {
-        println!("{}", spec.sample(&mut rng));
+    for expression in read_expressions() {
+        println!("{}", expression.execute(&mut rng));
     }
 }
 
