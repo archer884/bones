@@ -1,4 +1,5 @@
 use bangdice::Expression;
+use std::env;
 
 fn main() {
     let mut rng = rand::thread_rng();
@@ -8,6 +9,5 @@ fn main() {
 }
 
 fn read_expressions() -> impl Iterator<Item = Expression> {
-    use std::env;
     env::args().skip(1).filter_map(|s| s.parse().ok())
 }
