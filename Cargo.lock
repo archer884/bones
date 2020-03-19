@@ -2,8 +2,8 @@
 # It is not intended for manual editing.
 [[package]]
 name = "bangdice"
-version = "0.1.0"
-source = "git+https://github.com/archer884/bangdice.git#02a99b63d0006042d9a5e3dff7104ddcd22f7150"
+version = "0.1.1"
+source = "git+https://github.com/archer884/bangdice.git#0ae881c1d612038b2876d3c8ac137223034cd9f4"
 dependencies = [
  "rand 0.7.3 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
@@ -12,7 +12,7 @@ dependencies = [
 name = "bones"
 version = "0.1.0"
 dependencies = [
- "bangdice 0.1.0 (git+https://github.com/archer884/bangdice.git)",
+ "bangdice 0.1.1 (git+https://github.com/archer884/bangdice.git)",
  "rand 0.7.3 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
@@ -84,7 +84,7 @@ version = "0.9.0+wasi-snapshot-preview1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [metadata]
-"checksum bangdice 0.1.0 (git+https://github.com/archer884/bangdice.git)" = "<none>"
+"checksum bangdice 0.1.1 (git+https://github.com/archer884/bangdice.git)" = "<none>"
 "checksum cfg-if 0.1.10 (registry+https://github.com/rust-lang/crates.io-index)" = "4785bdd1c96b2a846b2bd7cc02e86b6b3dbf14e7e53446c4f54c92a361040822"
 "checksum getrandom 0.1.14 (registry+https://github.com/rust-lang/crates.io-index)" = "7abc8dd8451921606d809ba32e95b6111925cd2906060d2dcc29c070220503eb"
 "checksum libc 0.2.68 (registry+https://github.com/rust-lang/crates.io-index)" = "dea0c0405123bba743ee3f91f49b1c7cfb684eef0da0a50110f758ccf24cdff0"
