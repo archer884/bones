@@ -3,9 +3,15 @@ use std::env;
 
 fn main() {
     let mut rng = rand::thread_rng();
+    let mut sum = 0;
+
     for expression in read_expressions() {
-        println!("{}", expression.execute(&mut rng));
+        let result = expression.execute(&mut rng);
+        sum += result.total();
+        println!("{}", result);
     }
+
+    println!("===\n{:>3}", sum);
 }
 
 fn read_expressions() -> impl Iterator<Item = Expression> {
